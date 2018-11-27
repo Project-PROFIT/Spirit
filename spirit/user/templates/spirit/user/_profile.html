@@ -1,8 +1,9 @@
 {% load spirit_tags i18n %}
-
+{% load userprofile %} <!--ADDED -->
 
     <div class="profile-img">
-		<img class="profile-avatar" src="{% get_gravatar_url user=p_user size=200 %}" />
+		<p>{% profile_image p_user.userprofile.profile_image %}</p> <!--ADDED -->		
+		<!--<img class="profile-avatar" src="{% get_gravatar_url user=p_user size=200 %}" />--> <!--REMOVED -->
 		<div class="profile-username">{{ p_user.username }}</div>
 	</div>
 
