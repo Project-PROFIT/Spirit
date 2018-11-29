@@ -1,4 +1,5 @@
 {% load spirit_tags i18n %}
+{% load userprofile %} <!--ADDED -->
 
     <div class="comments">
 
@@ -8,7 +9,18 @@
 
                 <div class="comment-media">
                     <div class="comment-img">
-                        <img class="comment-avatar" src="{% get_gravatar_url user=c.user size=50 %}" />
+                    <!-- ADDED -->
+					{% with c.user.userprofile.profile_image as profile_image %}
+						{% if profile_image %}
+							 <img src="{{ profile_image.thumbnail.url }}" class="navbar-profile-image img-circle"
+							 alt="{% trans 'Profile image' %}" title="{{ request.user.userprofile.full_name }}">
+						{% else %}
+							 <img src="{% get_gravatar_url user=c.user size=50 %}" class="navbar-profile-image img-circle"
+							 alt="{% trans 'Profile image' %}" title="{{ request.user.userprofile.full_name }}">
+						{% endif %}
+                    {% endwith %}
+					<!-- ADDED ENDS -->
+                    <!--<img class="comment-avatar" src="{% get_gravatar_url user=c.user size=50 %}" />--> <!--REMOVED -->
                     </div>
 
                     <div class="comment-body">
