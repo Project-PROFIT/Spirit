@@ -1,4 +1,5 @@
 {% extends "spirit/_base.html" %}
+{% load userprofile %} <!--ADDED -->
 
 {% load spirit_tags i18n %}
 
@@ -39,8 +40,12 @@
 
                 <div class="comment-media">
                     <div class="comment-img">
-                        <img class="comment-avatar" src="{% get_gravatar_url user=flag.comment.user size=50 %}" />
-
+                            <!-- ADDED -->
+							{% with user.userprofile.profile_image as profile_image %}
+								<img src="{{ profile_image.thumbnail.url }}" class="navbar-profile-image img-circle"
+									 alt="{% trans 'Profile image' %}" title="{{ request.user.userprofile.full_name }}">
+							{% endwith %}
+							<!-- ADDED ENDS -->
                         <div class="comment-username">
                             <a href="{{ flag.comment.user.st.get_absolute_url }}">{{ flag.comment.user.username }}</a>
                         </div>
@@ -75,8 +80,12 @@
 
                 <div class="comment-media">
                     <div class="comment-img">
-                        <img class="comment-avatar" src="{% get_gravatar_url user=f.user size=50 %}" />
-
+                            <!-- ADDED -->
+							{% with user.userprofile.profile_image as profile_image %}
+								<img src="{{ profile_image.thumbnail.url }}" class="navbar-profile-image img-circle"
+									 alt="{% trans 'Profile image' %}" title="{{ request.user.userprofile.full_name }}">
+							{% endwith %}
+							<!-- ADDED ENDS -->
                         <div class="comment-username">
                             <a href="{{ f.user.st.get_absolute_url }}">{{ f.user.username }}</a>
                         </div>
