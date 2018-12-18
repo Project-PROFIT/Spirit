@@ -2,6 +2,7 @@
 
 {% load spirit_tags i18n %}
 {% load userprofile %} <!--ADDED -->
+{% load static %} 
 
 {% block title %}{% trans "Comment history" %}{% endblock %}
 
@@ -19,12 +20,16 @@
                 <div class="comment-media">
                     <div class="comment-img">
                         <!-- ADDED -->
-							{% with c.comment_fk.user.userprofile.profile_image as profile_image %}
+						{% with c.comment_fk.user.userprofile.profile_image as profile_image %}
+							{% if profile_image %}
 								<img src="{{ profile_image.thumbnail.url }}" class="navbar-profile-image img-circle"
-									 alt="{% trans 'Profile image' %}" title="{{ request.user.userprofile.full_name }}">
-								
-							{% endwith %}
-							<!-- ADDED ENDS -->
+								 alt="{% trans 'Profile image' %}" title="{{ request.user.userprofile.full_name }}">
+							 {% else %}
+								<img src="{% static 'images/platform_icons/user_top_menu-blue.svg' %}" class="navbar-profile-image img-circle"
+								alt="{% trans 'Profile image' %}" title="{{ request.user.userprofile.full_name }}">
+							{% endif %}								
+						{% endwith %}
+						<!-- ADDED ENDS -->
                     </div>
 
                     <div class="comment-body">
